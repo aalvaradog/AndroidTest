@@ -75,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
         <EditText
-            android:id="@+id/emali"
+            android:id="@+id/email"
             android:layout_width="360dp"
             android:layout_height="58dp"
             android:layout_marginTop="16dp"
@@ -104,7 +104,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emali" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <TextView
             android:id="@+id/textView6"
@@ -176,7 +176,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/registrar"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
