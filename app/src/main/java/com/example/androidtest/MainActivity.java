@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 login();
+
             }
         });
     }
@@ -59,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultado == false) {
             Toast.makeText(getApplicationContext(), "Las credenciales no coinciden", Toast.LENGTH_SHORT).show();
+        }else{
+            Intent menu= new Intent(this, Menu.class);
+            startActivity(menu);
         }
     }
 }

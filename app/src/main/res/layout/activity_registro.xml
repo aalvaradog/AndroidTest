@@ -19,11 +19,12 @@
         tools:context=".Registro">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/volver"
             android:layout_width="49dp"
             android:layout_height="71dp"
             android:backgroundTint="@color/white"
             android:contextClickable="false"
+            android:onClick="volver"
             android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +40,7 @@
             android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+            app:layout_constraintTop_toBottomOf="@+id/volver" />
 
         <EditText
             android:id="@+id/nombre"
