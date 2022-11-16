@@ -17,7 +17,7 @@ public class Conexion extends AppCompatActivity {
             StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-            conexion= DriverManager.getConnection("jdbc:jtds:sqlserver://192.168.1.7;databaseName=Taller_diseño;user=PrototipoD;password=1234;");
+            conexion= DriverManager.getConnection("jdbc:jtds:sqlserver://192.168.1.6;databaseName=EasyShop;user=PrototipoD;password=1234;");
         } catch (SQLException e) {
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
             System.out.println("Error: " + e.getMessage());

@@ -25,21 +25,23 @@ public class Insertar extends AppCompatActivity {
         }
     }
 
-    public void registrarUsuario(String nombre, String apellidos, String email, String carnet, String contraseña, String sede){
+    public int registrarUsuario(String nombre, String apellidos, String email, String carnet, String contraseña){
+        int salida=0;
         try{
             Conexion conn= new Conexion();
-            PreparedStatement pst=conn.conexionBD().prepareStatement("insert into Usuarios values(?,?,?,?,?,?)");
-            pst.setString(1,carnet;
+            PreparedStatement pst=conn.conexionBD().prepareStatement("insert into Usuarios values(?,?,?,?,?)");
+            pst.setString(1,carnet);
             pst.setString(2,nombre);
             pst.setString(3,apellidos);
             pst.setString(4,email);
             pst.setString(5,contraseña);
-            pst.setString(6,sede);
             pst.executeUpdate();
-
+            salida=0;
             Toast.makeText(getApplicationContext(),"Registro agregado",Toast.LENGTH_SHORT).show();
         } catch (SQLException e) {
+            salida=1;
             e.printStackTrace();
         }
+        return salida;
     }
 }
