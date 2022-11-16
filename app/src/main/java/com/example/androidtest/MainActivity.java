@@ -23,7 +23,7 @@ import com.example.androidtest.Insertar;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText usuario, contraseña;
+    EditText carnet, contraseña;
     Button iniciarSesion;
 
     @Override
@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usuario=(EditText)findViewById(R.id.Usuario);
+        carnet=(EditText)findViewById(R.id.Carnet);
         contraseña=(EditText)findViewById(R.id.Contraseña);
         iniciarSesion=(Button)findViewById(R.id.IniciarSesion);
 
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertar();
+                login();
             }
         });
     }
@@ -48,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
         startActivity(registro);
     }
 
-    public void insertar(){
-        try{
-            Insertar in=new Insertar();
-            in.insertar(usuario.getText().toString(), contraseña.getText().toString());
-            Toast.makeText(getApplicationContext(),"Registro agregado",Toast.LENGTH_SHORT).show();
+    public void login() {
+        boolean resultado = false;
+        try {
+            Leer read = new Leer();
+            resultado = read.login(carnet.getText().toString(), contraseña.getText().toString());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (resultado == false) {
+            Toast.makeText(getApplicationContext(), "Las credenciales no coinciden", Toast.LENGTH_SHORT).show();
         }
     }
 }

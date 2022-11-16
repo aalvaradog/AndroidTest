@@ -13,7 +13,6 @@ import java.util.concurrent.Callable;
 
 public class Leer extends AppCompatActivity {
 
-
     public boolean validarCarnet(String carnet){
         boolean salida=true;
         try{
@@ -25,6 +24,22 @@ public class Leer extends AppCompatActivity {
                 salida=false;
             }
             Toast.makeText(getApplicationContext(),"Registro agregado",Toast.LENGTH_SHORT).show();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return salida;
+    }
+
+    public boolean login(String carnet, String contraseña){
+        boolean salida=false;
+        try{
+            String q="exec login "+carnet+","+contraseña;
+            Conexion conn= new Conexion();
+            Statement statement=conn.conexionBD().createStatement();
+            ResultSet result=statement.executeQuery(q);
+            if(result!=null){
+                salida=true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
