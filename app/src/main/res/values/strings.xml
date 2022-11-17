@@ -92,6 +92,6 @@
     <string name="action_settings">Configuraciones</string>
     <string name="title_activity_menu">Menu</string>
     <string name="title_home">Inicio</string>
-    <string name="title_dashboard">Publicar</string>
+    <string name="title_dashboard">Publicar un nuevo anuncio</string>
     <string name="title_notifications">Perfil</string>
 </resources>

@@ -33,11 +33,11 @@ public class Leer extends AppCompatActivity {
     public boolean login(String carnet, String contraseña){
         boolean salida=false;
         try{
-            String q="exec login "+carnet+","+contraseña;
+            String q="Select * from Usuarios where carnet= "+carnet+" and contraseña= '"+contraseña+"';";
             Conexion conn= new Conexion();
             Statement statement=conn.conexionBD().createStatement();
             ResultSet result=statement.executeQuery(q);
-            if(result!=null){
+            if(result.next()){
                 salida=true;
             }
         } catch (SQLException e) {
