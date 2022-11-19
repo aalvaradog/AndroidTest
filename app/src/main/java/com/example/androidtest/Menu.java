@@ -1,10 +1,14 @@
 package com.example.androidtest;
 
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.SurfaceControl;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +27,16 @@ public class Menu extends AppCompatActivity {
 
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent parametro=getIntent();
+        String carnet=parametro.getStringExtra("Carnet");
+
+        Bundle bundle=new Bundle();
+        bundle.putString("Carnet",carnet);
+        Fragment f=new Fragment();
+        f.setArguments(bundle);
+        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        //transaction.replace(R.id);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

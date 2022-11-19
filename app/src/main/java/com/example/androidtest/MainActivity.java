@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Las credenciales no coinciden", Toast.LENGTH_SHORT).show();
         }else{
             Intent menu= new Intent(this, Menu.class);
+            menu.putExtra("Carnet",carnet.getText().toString());
             startActivity(menu);
         }
     }

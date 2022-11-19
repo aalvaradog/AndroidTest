@@ -13,8 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.androidtest.Anuncio;
+import com.example.androidtest.AnuncioAdapter;
 import com.example.androidtest.R;
 import com.example.androidtest.databinding.FragmentHomeBinding;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -28,11 +32,16 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        String[] test={"Secadora","Gabacha","Escritorio"};
-        ListView lv=root.findViewById(R.id.anuncios);
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,test);
+        ListView lv=root.findViewById(R.id.lvAnuncios);
 
-        lv.setAdapter(adapter);
+        ArrayList<Anuncio> anuncios=new ArrayList<>();
+        anuncios.add(new Anuncio("Laptop Hp","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","200,000","imageexample"));
+        anuncios.add(new Anuncio("Gabacha de laboratorio","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","20,000","imageexample"));
+        anuncios.add(new Anuncio("Escritorio pequeño","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","50,000","imageexample"));
+        anuncios.add(new Anuncio("Calculadora cientifica","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","10,000","imageexample"));
+        AnuncioAdapter anuncioAdapter=new AnuncioAdapter(getActivity(), R.layout.item_anuncio, anuncios);
+
+        lv.setAdapter(anuncioAdapter);
         return root;
     }
 
