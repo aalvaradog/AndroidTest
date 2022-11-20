@@ -32,7 +32,6 @@ public class Registro extends AppCompatActivity {
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Insertar insertar=new Insertar();
                 /*Leer read=new Leer();
                 boolean validacion=read.validarCarnet(carnet.getText().toString());
                 if(validacion=false){

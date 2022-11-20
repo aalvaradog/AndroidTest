@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 public class Leer extends AppCompatActivity {
@@ -26,6 +27,29 @@ public class Leer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Registro agregado",Toast.LENGTH_SHORT).show();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return salida;
+    }
+
+    public ArrayList<Anuncio> cargarMenu() {
+        ArrayList<Anuncio> salida=new ArrayList<>();
+        try {
+            String q = "Select nombre, descripcion, sede, precio, imagen from Productos;";
+            Conexion conn = new Conexion();
+            Statement statement = conn.conexionBD().createStatement();
+            ResultSet result = statement.executeQuery(q);
+            while (result.next()) {
+                Anuncio anuncio=new Anuncio();
+                anuncio.setTitulo(result.getString(1));
+                anuncio.setDescripcion(result.getString(2));
+                anuncio.setSede(result.getString(3));
+                anuncio.setPrecio(result.getString(4));
+                anuncio.setImagenUrl(result.getBytes(5));
+                salida.add(anuncio);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+
         }
         return salida;
     }

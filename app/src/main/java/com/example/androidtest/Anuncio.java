@@ -1,18 +1,23 @@
 package com.example.androidtest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class Anuncio {
     private String titulo;
     private String descripcion;
     private String sede;
     private String precio;
-    private String imagenUrl;
+    private Bitmap imagen;
 
-    public Anuncio(String titulo, String descripcion, String sede, String precio, String imagenUrl) {
+
+    public Anuncio(){}
+    public Anuncio(String titulo, String descripcion, String sede, String precio, byte[] imagenUrl) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.sede = sede;
         this.precio = precio;
-        this.imagenUrl = imagenUrl;
+        this.imagen = imagen;
     }
 
 
@@ -48,11 +53,17 @@ public class Anuncio {
         this.precio = precio;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
+    public Bitmap getImagenUrl() {
+        return imagen;
     }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
+    public void setImagenUrl(byte[] byteArray) {
+        if(byteArray!=null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            this.imagen = bmp;
+        }else{
+            this.imagen=null;
+        }
     }
+
 }

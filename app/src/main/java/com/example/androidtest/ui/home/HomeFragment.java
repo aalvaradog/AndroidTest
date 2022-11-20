@@ -15,6 +15,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidtest.Anuncio;
 import com.example.androidtest.AnuncioAdapter;
+import com.example.androidtest.Insertar;
+import com.example.androidtest.Leer;
 import com.example.androidtest.R;
 import com.example.androidtest.databinding.FragmentHomeBinding;
 
@@ -34,11 +36,13 @@ public class HomeFragment extends Fragment {
 
         ListView lv=root.findViewById(R.id.lvAnuncios);
 
+        Leer leerAnuncios=new Leer();
         ArrayList<Anuncio> anuncios=new ArrayList<>();
-        anuncios.add(new Anuncio("Laptop Hp","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","200,000","imageexample"));
+        anuncios=leerAnuncios.cargarMenu();
+        /*anuncios.add(new Anuncio("Laptop Hp","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","200,000","imageexample"));
         anuncios.add(new Anuncio("Gabacha de laboratorio","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","20,000","imageexample"));
         anuncios.add(new Anuncio("Escritorio pequeño","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","50,000","imageexample"));
-        anuncios.add(new Anuncio("Calculadora cientifica","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","10,000","imageexample"));
+        anuncios.add(new Anuncio("Calculadora cientifica","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","10,000","imageexample"));*/
         AnuncioAdapter anuncioAdapter=new AnuncioAdapter(getActivity(), R.layout.item_anuncio, anuncios);
 
         lv.setAdapter(anuncioAdapter);

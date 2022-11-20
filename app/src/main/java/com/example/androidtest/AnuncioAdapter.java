@@ -44,7 +44,7 @@ public class AnuncioAdapter extends ArrayAdapter<Anuncio> {
         nombre.setText(anuncio.getTitulo());
         precio.setText(anuncio.getPrecio());
         sede.setText(anuncio.getSede());
-        imagen.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.ic_launcher));
+        imagen.setImageBitmap(anuncio.getImagenUrl());
 
         return view;
     }

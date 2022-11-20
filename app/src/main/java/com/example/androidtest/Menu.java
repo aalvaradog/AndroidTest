@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.SurfaceControl;
 
+import com.example.androidtest.ui.dashboard.DashboardFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import com.example.androidtest.databinding.ActivityMenuBinding;
 public class Menu extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
+    private String out;
+    private Bundle results;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,15 @@ public class Menu extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Intent parametro=getIntent();
-        String carnet=parametro.getStringExtra("Carnet");
+        out=parametro.getStringExtra("Carnet");
 
-        Bundle bundle=new Bundle();
+
+        /*Bundle bundle=new Bundle();
         bundle.putString("Carnet",carnet);
         Fragment f=new Fragment();
         f.setArguments(bundle);
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        //transaction.replace(R.id);
+        transaction.replace(R.id.Das);*/
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -49,6 +53,12 @@ public class Menu extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
 
+    }
+
+    public Bundle getMyData(){
+        Bundle hm = new Bundle();
+        hm.putString("Carnet",out);
+        return hm;
     }
 
 }
