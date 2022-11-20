@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,9 +23,11 @@ import com.example.androidtest.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private FragmentHomeBinding binding;
+    SearchView buscar;
+    AnuncioAdapter anuncioAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        buscar=(SearchView)root.findViewById(R.id.buscar);
         ListView lv=root.findViewById(R.id.lvAnuncios);
 
         Leer leerAnuncios=new Leer();
@@ -43,9 +47,11 @@ public class HomeFragment extends Fragment {
         anuncios.add(new Anuncio("Gabacha de laboratorio","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","20,000","imageexample"));
         anuncios.add(new Anuncio("Escritorio pequeño","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","50,000","imageexample"));
         anuncios.add(new Anuncio("Calculadora cientifica","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","10,000","imageexample"));*/
-        AnuncioAdapter anuncioAdapter=new AnuncioAdapter(getActivity(), R.layout.item_anuncio, anuncios);
+        anuncioAdapter=new AnuncioAdapter(getActivity(), R.layout.item_anuncio, anuncios);
 
         lv.setAdapter(anuncioAdapter);
+
+        buscar.setOnQueryTextListener(this);
         return root;
     }
 
@@ -53,5 +59,16 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        anuncioAdapter.filtrado(newText);
+        return false;
     }
 }

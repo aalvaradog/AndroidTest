@@ -14,12 +14,14 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AnuncioAdapter extends ArrayAdapter<Anuncio> {
 
     private Context context;
     private int layoutId;
     private ArrayList<Anuncio> arrayAnuncios;
+    private ArrayList<Anuncio> arrayOriginal;
 
     public AnuncioAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Anuncio> objects) {
         super(context, resource, objects);
@@ -27,6 +29,9 @@ public class AnuncioAdapter extends ArrayAdapter<Anuncio> {
         this.context=context;
         this.layoutId=resource;
         this.arrayAnuncios=objects;
+
+        this.arrayOriginal=new ArrayList<>();
+        arrayOriginal.addAll(arrayAnuncios);
     }
 
     @NonNull
@@ -47,5 +52,28 @@ public class AnuncioAdapter extends ArrayAdapter<Anuncio> {
         imagen.setImageBitmap(anuncio.getImagenUrl());
 
         return view;
+    }
+
+    public void filtrado(final String txtBuscar) {
+        int longitud = txtBuscar.length();
+        if (longitud == 0) {
+            arrayAnuncios.clear();
+            arrayAnuncios.addAll(arrayOriginal);
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Anuncio> collecion = arrayAnuncios.stream()
+                        .filter(i -> i.getTitulo().toLowerCase().contains(txtBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                arrayAnuncios.clear();
+                arrayAnuncios.addAll(collecion);
+            } else {
+                for (Anuncio c : arrayOriginal) {
+                    if (c.getTitulo().toLowerCase().contains(txtBuscar.toLowerCase())) {
+                        arrayAnuncios.add(c);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

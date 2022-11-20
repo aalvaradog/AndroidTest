@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:contentDescription="Logo configuraciones"
     tools:context=".ui.settings.SettingsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="246dp"
+        android:layout_height="250dp"
+        android:contentDescription="Logo configuraciones"
+        android:src="@drawable/setting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/privacidad"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="105dp"
+        android:backgroundTint="@color/azul_oscuro"
+        android:text="Privacidad y seguridad"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <Button
+        android:id="@+id/acercaDe"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/azul_oscuro"
+        android:text="Acerca de"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacidad" />
+
+    <Button
+        android:id="@+id/cerrarSesion"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/azul_oscuro"
+        android:text="Cerrar sesión"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/acercaDe" />
+</androidx.constraintlayout.widget.ConstraintLayout>
