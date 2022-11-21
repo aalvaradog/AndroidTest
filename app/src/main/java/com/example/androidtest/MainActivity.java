@@ -66,4 +66,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(menu);
         }
     }
+
+    public Bundle getMyData2(){
+        Bundle hm = new Bundle();
+        hm.putString("Carnet",carnet.getText().toString());
+        return hm;
+    }
 }

@@ -46,7 +46,7 @@ public class Registro extends AppCompatActivity {
             }
         });
     }
-    public void volver(View view){
+    private void volver(View view){
         Intent i=new Intent(this,MainActivity.class);
         startActivity(i);
     }

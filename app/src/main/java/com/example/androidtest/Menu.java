@@ -31,16 +31,7 @@ public class Menu extends AppCompatActivity {
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Intent parametro=getIntent();
-        out=parametro.getStringExtra("Carnet");
-
-
-        /*Bundle bundle=new Bundle();
-        bundle.putString("Carnet",carnet);
-        Fragment f=new Fragment();
-        f.setArguments(bundle);
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.Das);*/
+        out=getIntent().getStringExtra("Carnet");
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

@@ -1,9 +1,11 @@
 package com.example.androidtest.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -18,8 +20,10 @@ import com.example.androidtest.Anuncio;
 import com.example.androidtest.AnuncioAdapter;
 import com.example.androidtest.Insertar;
 import com.example.androidtest.Leer;
+import com.example.androidtest.Menu;
 import com.example.androidtest.R;
 import com.example.androidtest.databinding.FragmentHomeBinding;
+import com.example.androidtest.detallesActivity;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,9 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
     private FragmentHomeBinding binding;
     SearchView buscar;
     AnuncioAdapter anuncioAdapter;
+    ArrayList<Anuncio> anuncios=new ArrayList<>();
+    Anuncio anuncio=new Anuncio();
+    String carnet;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,18 +47,32 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
         buscar=(SearchView)root.findViewById(R.id.buscar);
         ListView lv=root.findViewById(R.id.lvAnuncios);
 
+        Menu activity=(Menu)getActivity();
+        Bundle results=activity.getMyData();
+        carnet=results.getString("Carnet");
+
         Leer leerAnuncios=new Leer();
-        ArrayList<Anuncio> anuncios=new ArrayList<>();
         anuncios=leerAnuncios.cargarMenu();
-        /*anuncios.add(new Anuncio("Laptop Hp","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","200,000","imageexample"));
-        anuncios.add(new Anuncio("Gabacha de laboratorio","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","20,000","imageexample"));
-        anuncios.add(new Anuncio("Escritorio pequeño","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","50,000","imageexample"));
-        anuncios.add(new Anuncio("Calculadora cientifica","Se vende Laptop Hp en perfecto estado taka taka taka tak","San José","10,000","imageexample"));*/
         anuncioAdapter=new AnuncioAdapter(getActivity(), R.layout.item_anuncio, anuncios);
 
         lv.setAdapter(anuncioAdapter);
 
         buscar.setOnQueryTextListener(this);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                anuncio= anuncios.get(position);
+                Intent intent=new Intent(getActivity(), detallesActivity.class);
+                //intent.putExtra("Carnet",carnet);
+                intent.putExtra("Titulo",anuncio.getTitulo());
+                intent.putExtra("Descripcion",anuncio.getDescripcion());
+                intent.putExtra("Precio",anuncio.getPrecio());
+                intent.putExtra("Sede",anuncio.getSede());
+                intent.putExtra("Imagen",anuncio.getImagenUrl());
+                startActivity(intent);
+            }
+        });
         return root;
     }
 
