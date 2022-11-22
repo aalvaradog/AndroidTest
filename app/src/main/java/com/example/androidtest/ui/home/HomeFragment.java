@@ -64,12 +64,12 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 anuncio= anuncios.get(position);
                 Intent intent=new Intent(getActivity(), detallesActivity.class);
-                //intent.putExtra("Carnet",carnet);
                 intent.putExtra("Titulo",anuncio.getTitulo());
                 intent.putExtra("Descripcion",anuncio.getDescripcion());
                 intent.putExtra("Precio",anuncio.getPrecio());
                 intent.putExtra("Sede",anuncio.getSede());
                 intent.putExtra("Imagen",anuncio.getImagenUrl());
+                intent.putExtra("Carnet",anuncio.getCarnet());
                 startActivity(intent);
             }
         });

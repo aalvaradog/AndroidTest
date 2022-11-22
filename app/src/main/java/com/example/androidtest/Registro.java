@@ -1,12 +1,17 @@
 package com.example.androidtest;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -14,7 +19,8 @@ import java.util.Locale;
 public class Registro extends AppCompatActivity {
 
     EditText nombre, apellidos, contraseña, email, carnet, sede;
-    Button registrar, volver;
+    Button registrar;
+    ImageButton volver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,29 +32,53 @@ public class Registro extends AppCompatActivity {
         email=(EditText)findViewById(R.id.email);
         contraseña=(EditText)findViewById(R.id.contraseña);
         carnet=(EditText)findViewById(R.id.carnet);
+        volver=(ImageButton)findViewById(R.id.volver);
 
         registrar=(Button)findViewById(R.id.registrar);
+
+        volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Leer read=new Leer();
+                Leer read=new Leer();
                 boolean validacion=read.validarCarnet(carnet.getText().toString());
-                if(validacion=false){
-                    Toast.makeText(getApplicationContext(),"Carnet inválido",Toast.LENGTH_SHORT).show();
-                }*/
-                if(validarContraseña(contraseña.getText().toString())){
-                    registrar();
+                if(validacion==false || validarContraseña(contraseña.getText().toString())==false){
+                    AlertDialog.Builder dialog=new AlertDialog.Builder(v.getContext());
+                    dialog.setMessage("Por favor ingrese un carnet y una contraseña válidos");
+                    dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    AlertDialog d=dialog.create();
+                    d.show();
+                    //Toast.makeText(getApplicationContext(),"Carnet inválido",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getApplicationContext(),"Contraseña invalida",Toast.LENGTH_SHORT).show();
-                };
-
+                    registrar();
+                }
             }
         });
     }
-    private void volver(View view){
-        Intent i=new Intent(this,MainActivity.class);
-        startActivity(i);
+
+    private void exito(Context context){
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Registro exitoso");
+        dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent=new Intent(context,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        AlertDialog d=dialog.create();
+        d.show();
     }
 
     //Método para insertar los datos en la base de datos
@@ -65,7 +95,8 @@ public class Registro extends AppCompatActivity {
             e.printStackTrace();
         }
         if(resultado==0){
-            Toast.makeText(getApplicationContext(),"Usuario registrado",Toast.LENGTH_SHORT).show();
+            exito(this);
+            //Toast.makeText(getApplicationContext(),"Usuario registrado",Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(getApplicationContext(),"No se pudo agregar el usuario",Toast.LENGTH_SHORT).show();
         }

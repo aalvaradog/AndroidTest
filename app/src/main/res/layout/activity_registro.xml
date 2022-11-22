@@ -25,7 +25,6 @@
             android:backgroundTint="@color/white"
             android:contentDescription="Volver"
             android:contextClickable="false"
-            android:onClick="volver"
             android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

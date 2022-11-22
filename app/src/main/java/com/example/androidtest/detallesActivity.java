@@ -15,29 +15,30 @@ public class detallesActivity extends AppCompatActivity {
 
 
     ImageButton volver;
-    String carnet,titulo,descripcion,sede,precio;
-    TextView tTitulo,tDescripcion,tSede,tPrecio;
+    String carnet, titulo, descripcion, sede, precio;
+    TextView tTitulo, tDescripcion, tSede, tPrecio;
     ImageView iImagen;
     byte[] imagen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalles);
 
-        volver=(ImageButton) findViewById(R.id.volverDetalles);
+        volver = (ImageButton) findViewById(R.id.volverDetalles);
 
-        carnet=getIntent().getStringExtra("Carnet");
+        carnet = getIntent().getStringExtra("Carnet");
 
-        titulo=getIntent().getStringExtra("Titulo");
-        descripcion=getIntent().getStringExtra("Descripcion");
-        precio=getIntent().getStringExtra("Precio");
-        sede=getIntent().getStringExtra("Sede");
-        imagen=getIntent().getByteArrayExtra("Imagen");
+        titulo = getIntent().getStringExtra("Titulo");
+        descripcion = getIntent().getStringExtra("Descripcion");
+        precio = getIntent().getStringExtra("Precio");
+        sede = getIntent().getStringExtra("Sede");
+        imagen = getIntent().getByteArrayExtra("Imagen");
 
-        tTitulo=(TextView) findViewById(R.id.tituloDetalles);
-        tDescripcion=(TextView) findViewById(R.id.descripcionDetalles);
-        tPrecio=(TextView) findViewById(R.id.precioDetalles);
-        iImagen=(ImageView) findViewById(R.id.imagenDetalles);
+        tTitulo = (TextView) findViewById(R.id.tituloDetalles);
+        tDescripcion = (TextView) findViewById(R.id.descripcionDetalles);
+        tPrecio = (TextView) findViewById(R.id.precioDetalles);
+        iImagen = (ImageView) findViewById(R.id.imagenDetalles);
 
 
         tTitulo.setText(titulo);
@@ -48,16 +49,11 @@ public class detallesActivity extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent menu= new Intent(getApplicationContext(), Menu.class);
-                menu.putExtra("Carnet",carnet);
+                Intent menu = new Intent(getApplicationContext(), Menu.class);
+                menu.putExtra("Carnet", carnet);
                 startActivity(menu);
 
             }
         });
-    }
-
-    public void volver(){
-        Intent i=new Intent(this,Menu.class);
-        startActivity(i);
     }
 }

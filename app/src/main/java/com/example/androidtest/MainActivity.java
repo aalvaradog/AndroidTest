@@ -1,7 +1,9 @@
 package com.example.androidtest;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -59,7 +61,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (resultado == false) {
-            Toast.makeText(getApplicationContext(), "Las credenciales no coinciden", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+            dialog.setMessage("Ingrese un carnet y una contraseña válidos");
+            dialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            AlertDialog d=dialog.create();
+            d.show();
         }else{
             Intent menu= new Intent(this, Menu.class);
             menu.putExtra("Carnet",carnet.getText().toString());

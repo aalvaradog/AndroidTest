@@ -8,19 +8,37 @@ public class Anuncio {
     private String descripcion;
     private String sede;
     private String precio;
+    private String id;
     private byte[] imagen;
+    private String carnet;
 
 
     public Anuncio(){}
 
-    public Anuncio(String titulo, String descripcion, String sede, String precio, byte[] imagenUrl) {
+    public Anuncio(String titulo, String descripcion, String sede, String precio, byte[] imagenUrl, String id) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.sede = sede;
         this.precio = precio;
         this.imagen = imagen;
+        this.id=id;
     }
 
+    public String getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitulo() {
         return titulo;

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +38,10 @@ public class AnuncioAdapter extends ArrayAdapter<Anuncio> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view=layoutInflater.inflate(layoutId,parent,false);
-        TextView nombre=(TextView) view.findViewById(R.id.nombreAnuncio);
-        TextView precio=(TextView) view.findViewById(R.id.precioAnuncio);
-        TextView sede=(TextView) view.findViewById(R.id.sedeAnuncio);
-        ImageView imagen=(ImageView) view.findViewById(R.id.imagen);
+        TextView nombre=(TextView) view.findViewById(R.id.nombreAnuncioEliminar);
+        TextView precio=(TextView) view.findViewById(R.id.precioAnuncioEliminar);
+        TextView sede=(TextView) view.findViewById(R.id.sedeAnuncioEliminar);
+        ImageView imagen=(ImageView) view.findViewById(R.id.imagenEliminar);
 
         Anuncio anuncio=arrayAnuncios.get(position);
 

@@ -8,7 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <ImageView
-        android:id="@+id/imagen"
+        android:id="@+id/imagenEliminar"
         android:layout_width="170dp"
         android:layout_height="170dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/ic_home_black_24dp" />
 
     <TextView
-        android:id="@+id/nombreAnuncio"
+        android:id="@+id/nombreAnuncioEliminar"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="20dp"
@@ -26,11 +26,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagen"
+        app:layout_constraintStart_toEndOf="@+id/imagenEliminar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sedeAnuncio"
+        android:id="@+id/sedeAnuncioEliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -38,11 +38,11 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagen"
-        app:layout_constraintTop_toBottomOf="@+id/nombreAnuncio" />
+        app:layout_constraintStart_toEndOf="@+id/imagenEliminar"
+        app:layout_constraintTop_toBottomOf="@+id/nombreAnuncioEliminar" />
 
     <TextView
-        android:id="@+id/precioAnuncio"
+        android:id="@+id/precioAnuncioEliminar"
         android:layout_width="70dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
@@ -50,6 +50,6 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imagen"
-        app:layout_constraintTop_toBottomOf="@+id/sedeAnuncio" />
+        app:layout_constraintStart_toEndOf="@+id/imagenEliminar"
+        app:layout_constraintTop_toBottomOf="@+id/sedeAnuncioEliminar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
