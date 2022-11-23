@@ -67,9 +67,10 @@ public class HomeFragment extends Fragment implements SearchView.OnQueryTextList
                 intent.putExtra("Titulo",anuncio.getTitulo());
                 intent.putExtra("Descripcion",anuncio.getDescripcion());
                 intent.putExtra("Precio",anuncio.getPrecio());
-                intent.putExtra("Sede",anuncio.getSede());
+                intent.putExtra("Sede",leerAnuncios.consultarSede(anuncio.getSede()));
                 intent.putExtra("Imagen",anuncio.getImagenUrl());
                 intent.putExtra("Carnet",anuncio.getCarnet());
+                intent.putExtra("Id",anuncio.getId());
                 startActivity(intent);
             }
         });

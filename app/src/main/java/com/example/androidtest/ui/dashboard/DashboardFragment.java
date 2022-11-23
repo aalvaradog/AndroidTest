@@ -29,13 +29,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.androidtest.Categoria;
 import com.example.androidtest.Insertar;
+import com.example.androidtest.Leer;
 import com.example.androidtest.Menu;
 import com.example.androidtest.R;
 
+import com.example.androidtest.Sede;
 import com.example.androidtest.databinding.FragmentDashboardBinding;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
@@ -68,8 +72,12 @@ public class DashboardFragment extends Fragment {
         descripcion=(TextView)root.findViewById(R.id.descripcionProducto);
         precio=(TextView)root.findViewById(R.id.precioProducto);
 
-        String[] test={"Selecione la categoria...","Muebles","Ofimatica","Ropa"};
-        String[] test2={"Selecione la sede...","San José","Cartago","Alajuela","San Carlos"};
+        Leer leer=new Leer();
+        ArrayList<Sede> consultaSedes=leer.consultarSedes();
+        ArrayList<String> test2=crearListaSedes(consultaSedes);
+
+        ArrayList<Categoria> consultarCategorias=leer.consultarCategorias();
+        ArrayList<String> test=crearListaCategorias(consultarCategorias);
 
         ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,test);
         ArrayAdapter<String> adapter2=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,test2);
@@ -80,7 +88,7 @@ public class DashboardFragment extends Fragment {
         categorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                categoria=categorias.getSelectedItem().toString();
+                categoria=consultarCategorias.get(position).getId();
             }
 
             @Override
@@ -92,7 +100,7 @@ public class DashboardFragment extends Fragment {
         sedes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sede=sedes.getSelectedItem().toString();
+                sede=consultaSedes.get(position).getId();
             }
 
             @Override
@@ -141,8 +149,8 @@ public class DashboardFragment extends Fragment {
                 }
             });
 
-    public void cargarImagen(){
-        Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+    public void cargarImagen() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         cameraLauncher.launch(intent);
     }
@@ -152,9 +160,9 @@ public class DashboardFragment extends Fragment {
         int resultado=0;
         try{
             resultado=in.insertarAnuncio(carnet,
-                    "1",
+                    categoria,
                     nombre.getText().toString(),
-                    "1",
+                    sede,
                     descripcion.getText().toString(),
                     precio.getText().toString(),
                     imagen);
@@ -168,9 +176,25 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public ArrayList<String> crearListaSedes(ArrayList<Sede> arrayList){
+        ArrayList<String> salida=new ArrayList<>();
+        for(int i=0;i<arrayList.size();i++){
+            salida.add(arrayList.get(i).getDescripcion());
+        }
+        return salida;
     }
-}
+
+    public ArrayList<String> crearListaCategorias(ArrayList<Categoria> arrayList){
+        ArrayList<String> salida=new ArrayList<>();
+        for(int i=0;i<arrayList.size();i++){
+            salida.add(arrayList.get(i).getDescripcion());
+        }
+        return salida;
+    }
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+            binding = null;
+        }
+    }

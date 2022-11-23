@@ -15,10 +15,11 @@ public class detallesActivity extends AppCompatActivity {
 
 
     ImageButton volver;
-    String carnet, titulo, descripcion, sede, precio;
+    String carnet, titulo, descripcion, sede, precio,idAnuncio;
     TextView tTitulo, tDescripcion, tSede, tPrecio;
     ImageView iImagen;
     byte[] imagen;
+    Button reportar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class detallesActivity extends AppCompatActivity {
         volver = (ImageButton) findViewById(R.id.volverDetalles);
 
         carnet = getIntent().getStringExtra("Carnet");
+        carnet = getIntent().getStringExtra("Id");
 
         titulo = getIntent().getStringExtra("Titulo");
         descripcion = getIntent().getStringExtra("Descripcion");
@@ -38,13 +40,26 @@ public class detallesActivity extends AppCompatActivity {
         tTitulo = (TextView) findViewById(R.id.tituloDetalles);
         tDescripcion = (TextView) findViewById(R.id.descripcionDetalles);
         tPrecio = (TextView) findViewById(R.id.precioDetalles);
+        tSede=(TextView)findViewById(R.id.sedeDetalles);
         iImagen = (ImageView) findViewById(R.id.imagenDetalles);
+        reportar=(Button)findViewById(R.id.reportar);
 
 
         tTitulo.setText(titulo);
         tDescripcion.setText(descripcion);
         tPrecio.setText(precio);
+        tSede.setText(sede);
         iImagen.setImageBitmap(BitmapFactory.decodeByteArray(imagen, 0, imagen.length));
+
+        reportar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),ReporteActivity.class);
+                intent.putExtra("Carnet",carnet);
+                intent.putExtra("Id",idAnuncio);
+                startActivity(intent);
+            }
+        });
 
         volver.setOnClickListener(new View.OnClickListener() {
             @Override

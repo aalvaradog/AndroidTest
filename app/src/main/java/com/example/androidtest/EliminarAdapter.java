@@ -52,22 +52,27 @@ public class EliminarAdapter extends ArrayAdapter<Anuncio> {
 
         Anuncio anuncio=arrayAnuncios.get(position);
 
+        Leer leer=new Leer();
+
         nombre.setText(anuncio.getTitulo());
         precio.setText(anuncio.getPrecio());
-        sede.setText(anuncio.getSede());
+        sede.setText(leer.consultarSede(anuncio.getSede()));
         imagen.setImageBitmap(anuncio.convertirABitmap(anuncio.getImagenUrl()));
         id=anuncio.getId();
 
         eliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*Borrar borrar=new Borrar();
+                boolean resultado=borrar.borrarAnuncio(arrayAnuncios.get(position).getId());
+            }*/
                 AlertDialog.Builder dialog=new AlertDialog.Builder(context);
                 dialog.setMessage("¿Seguro que desea eliminar el anuncio?");
                 dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Borrar borrar=new Borrar();
-                        boolean resultado=borrar.borrarAnuncio(id);
+                        boolean resultado=borrar.borrarAnuncio(arrayAnuncios.get(position).getId());
                         if(resultado){
                             AlertDialog.Builder builder=new AlertDialog.Builder(context);
                             builder.setMessage("Anuncio Eliminado");
@@ -101,7 +106,6 @@ public class EliminarAdapter extends ArrayAdapter<Anuncio> {
                 notifyDataSetChanged();
             }
         });
-
         return view;
     }
 

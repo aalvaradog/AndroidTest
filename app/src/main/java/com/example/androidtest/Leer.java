@@ -37,7 +37,7 @@ public class Leer extends AppCompatActivity {
     public ArrayList<Anuncio> cargarMenu() {
         ArrayList<Anuncio> salida=new ArrayList<>();
         try {
-            String q = "Select nombre, descripcion, sede, precio, imagen, idUsuario from Productos;";
+            String q = "Select nombre, descripcion, sede, precio, imagen, idUsuario, id from Productos;";
             Conexion conn = new Conexion();
             Statement statement = conn.conexionBD().createStatement();
             ResultSet result = statement.executeQuery(q);
@@ -49,6 +49,7 @@ public class Leer extends AppCompatActivity {
                 anuncio.setPrecio(result.getString(4));
                 anuncio.setImagenUrl(result.getBytes(5));
                 anuncio.setCarnet(result.getString(6));
+                anuncio.setId(result.getString(7));
                 salida.add(anuncio);
             }
         } catch (SQLException e) {
@@ -107,6 +108,76 @@ public class Leer extends AppCompatActivity {
             ResultSet result=statement.executeQuery(q);
             if(result.next()){
                 salida=result.getString(1)+" "+result.getString(2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return salida;
+    }
+
+    public ArrayList<Sede> consultarSedes(){
+        ArrayList<Sede> sedes=new ArrayList<>();
+        try{
+            String q="Select id, descripcion from Sedes;";
+            Conexion conn = new Conexion();
+            Statement statement = conn.conexionBD().createStatement();
+            ResultSet result = statement.executeQuery(q);
+            while (result.next()) {
+                Sede sede=new Sede();
+                sede.setId(result.getString(1));
+                sede.setDescripcion(result.getString(2));
+                sedes.add(sede);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sedes;
+    }
+
+    public ArrayList<Categoria> consultarCategorias(){
+        ArrayList<Categoria> categorias=new ArrayList<>();
+        try{
+            String q="Select id, descripcion from Categorias;";
+            Conexion conn = new Conexion();
+            Statement statement = conn.conexionBD().createStatement();
+            ResultSet result = statement.executeQuery(q);
+            while (result.next()) {
+                Categoria categoria=new Categoria();
+                categoria.setId(result.getString(1));
+                categoria.setDescripcion(result.getString(2));
+                categorias.add(categoria);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
+    }
+
+    public String consultarSede(String id){
+        String salida="";
+        try{
+            String q="Select id, descripcion from Sedes where id="+id;
+            Conexion conn = new Conexion();
+            Statement statement = conn.conexionBD().createStatement();
+            ResultSet result = statement.executeQuery(q);
+            while (result.next()) {
+                salida=result.getString(2);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return salida;
+    }
+
+    public String consultarCategoria(String id){
+        String salida="";
+        try{
+            String q="Select id, descripcion from Categorias where id="+id;
+            Conexion conn = new Conexion();
+            Statement statement = conn.conexionBD().createStatement();
+            ResultSet result = statement.executeQuery(q);
+            while (result.next()) {
+                salida=result.getString(2);
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -24,6 +24,23 @@ public class Insertar extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public int insertarReporte(String id, String motivo, String explicacion){
+        int salida=0;
+        try{
+            Conexion conn= new Conexion();
+            PreparedStatement pst=conn.conexionBD().prepareStatement("insert into Reportes values(?,?,?)");
+            pst.setString(1,id);
+            pst.setString(2,motivo);
+            pst.setString(3,explicacion);
+            pst.executeUpdate();
+            salida=0;
+            //Toast.makeText(getApplicationContext(),"Reporte agregado",Toast.LENGTH_SHORT).show();
+        } catch (SQLException e) {
+            salida=1;
+            e.printStackTrace();
+        }
+        return salida;
+    }
 
     public int insertarAnuncio(String carnet, String categoria, String nombre, String sede, String descripcion, String precio, byte[] imagen){
         int salida=0;
@@ -36,8 +53,7 @@ public class Insertar extends AppCompatActivity {
             pst.setString(4,descripcion);
             pst.setString(5,sede);
             pst.setString(6,precio);
-            pst.setBytes(7,imagen);
-            pst.executeUpdate();
+            pst.setBytes(7,imagen);            pst.executeUpdate();
             salida=0;
             Toast.makeText(getApplicationContext(),"Registro agregado",Toast.LENGTH_SHORT).show();
         } catch (SQLException e) {
